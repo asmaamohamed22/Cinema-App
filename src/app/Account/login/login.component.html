@@ -1,0 +1,94 @@
+<section class="vh-100" style="background-color: #eee">
+  <div class="container h-100">
+    <div class="row d-flex flex-column justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card text-black" style="border-radius: 25px">
+          <div class="card-body p-md-5">
+            <div class="row justify-content-center">
+
+              <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                *ngIf="message != null && message != ''">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  <span class="sr-only">Close</span>
+                </button>
+                {{message}}
+              </div>
+
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                  SignIn
+                </p>
+
+                <form class="mx-1 mx-md-4" [formGroup]="loginForm" (ngSubmit)="login()">
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" formControlName="email" id="email" class="form-control" placeholder="Email" />
+                      <div class="text-danger" *ngIf="
+                            loginFormControl.email.touched &&
+                            loginFormControl.email.invalid &&
+                            loginFormControl.email.errors?.required
+                          ">
+                        Email is required
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4">
+                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" class="form-control" formControlName="password" placeholder="Password" />
+                      <div class="text-danger" *ngIf="
+                          loginFormControl.password.invalid &&
+                          loginFormControl.password.touched
+                        ">
+                        <div class="text-danger" *ngIf="
+                            loginFormControl.password.touched &&
+                            loginFormControl.password.errors?.required
+                          ">
+                          Password is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col d-flex justify-content-center mb-4">
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input"  formControlName="rememberMe"  id="checkbox" />
+                      <label class="form-check-label" for="checkbox">Remember Me</label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-secondary btn-lg" [disabled]="!loginForm.valid">
+                      Login
+                    </button>
+                  </div>
+
+                  <p class="text-center text-muted mt-4 mb-0">
+                    Don't have an account?
+                    <a routerLink="/register" class="fw-bold text-body">
+                      <u>Register here</u>
+                    </a>
+                  </p>
+
+                  <div class="col d-flex justify-content-center mb-4">
+                    <!-- Simple link -->
+                    <a href="#!" >Forgot password?</a>
+                  </div>
+                </form>
+
+              </div>
+
+              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                  class="img-fluid" alt="Sample image" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
