@@ -12,6 +12,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterConfirmComponent } from './Account/register-confirm/register-confirm.component';
 import { ForgetPasswordComponent } from './Account/forget-password/forget-password.component';
+import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
+import { DashboardComponent } from './Admin/dashboard/dashboard.component';
+import { UsersComponent } from './Admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,10 @@ import { ForgetPasswordComponent } from './Account/forget-password/forget-passwo
     FooterMenuComponent,
     RegisterConfirmComponent,
     ForgetPasswordComponent,
+    PasswordConfirmComponent,
+    PasswordConfirmComponent,
+    DashboardComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

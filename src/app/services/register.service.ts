@@ -5,6 +5,7 @@ import { RegisterModel } from '../models/register.model';
 import { catchError } from 'rxjs/operators';
 import { Users } from '../models/user.model';
 import { LoginModel } from '../models/login.model';
+import { ResetPasswordModel } from '../models/resetPasswords';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,12 @@ export class RegisterService {
     responseType: 'text',
     withCredentials: true
   };
-
+ Options: Object = {
+    headers: new HttpHeaders({
+      'Accept': 'text/html',
+      'Content-Type': 'application/json',
+    }),
+  };
   Register(reg: any): Observable<RegisterModel> {
     return this.http.post<RegisterModel>(this.baseUrl + "Register", JSON.stringify(reg), this.httpOptions)
       .pipe(
@@ -62,7 +68,11 @@ export class RegisterService {
   }
 
   ForgetPassword(email: string) {
-    return this.http.get(this.baseUrl + 'ForgetPassword/' + email).pipe();
+    return this.http.get(this.baseUrl + 'ForgetPassword/' + email,this.httpOptions).pipe();
+  }
+
+  ApiResetPassword(passModel: ResetPasswordModel): Observable<ResetPasswordModel> {
+    return this.http.post<ResetPasswordModel>(this.baseUrl + 'ResetPassword', passModel, this.Options).pipe();
   }
 
   errorHandler(error: any) {
