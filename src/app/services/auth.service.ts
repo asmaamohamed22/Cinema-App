@@ -12,7 +12,7 @@ export class AuthService {
   expire: string;
   role: string;
 
-  constructor(private service: CryptService, private http: HttpClient) { 
+  constructor(private service: CryptService, private http: HttpClient) {
     if (this.IsUserRegistered()) {
       this.expire = this.service.Decrypt(localStorage.getItem('expire'));
       this.email = this.service.Decrypt(localStorage.getItem('email'));
@@ -23,7 +23,7 @@ export class AuthService {
   async installStorage(remember: boolean, email: string){
     const day = new Date();
     if (remember) {
-      day.setDate(day.getDay() + 10);
+      day.setDate(day.getDate() + 10);
     }
     else {
       day.setMinutes(day.getMinutes() + 30);

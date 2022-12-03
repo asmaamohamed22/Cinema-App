@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Users } from '../models/user.model';
+import { UserModel } from '../models/userModel';
 
 @Injectable({
   providedIn: 'root'
@@ -28,11 +29,25 @@ export class AdminService {
     }),
   };
 
-  getAllUsers(): Observable<Users[]> {
+  GetAllUsers(): Observable<Users[]> {
     return this.http.get<Users[]>(this.baseUrl + "GetAllUsers")
       .pipe(
         catchError(this.errorHandler)
       );
+  }
+
+  AddUser(model:UserModel): Observable<UserModel> {
+    return this.http.post<UserModel>(this.baseUrl + "AddUser",model, this.Options)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  GetUser(id:string): Observable<Users> {
+    return this.http.get<Users>(this.baseUrl + "GetUser/" + id, this.Options)
+    .pipe(
+      catchError(this.errorHandler)
+    );
   }
 
   errorHandler(error: any) {

@@ -1,1 +1,32 @@
-<p>users works!</p>
+<div class="">
+  <div>
+      <table id="tbl" class="table table-response bg-light border">
+          <thead>
+              <tr class="bg-dark text-light">
+                  <th>UserName</th>
+                  <th>Email </th>
+                  <th>PhoneNumber</th>
+                  <th>Action</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users">
+                  <td scope="row">{{user.userName}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.phoneNumber}}</td>
+                  <td>
+                      <div>
+                          <button type="button" (click)="EditUser(user.id)"
+                              class="btn btn-primary btn-sm">Edit</button>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+  <div>
+      <button type="button" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#modelId"
+          >Delete
+      </button>
+  </div>
+</div>

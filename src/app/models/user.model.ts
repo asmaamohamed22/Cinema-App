@@ -1,7 +1,7 @@
-export interface Users {
-  id: string
-  userName: string,
-  normalizedUserName: string,
+ export interface Users {
+  id: string;
+  userName: string;
+  normalizedUserName: string;
 	email: string;
 	normalizedEmail: string;
 	emailConfirmed : boolean;

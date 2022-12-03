@@ -13,16 +13,17 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginModel: LoginModel;
-  loginForm: FormGroup;
-  submitted = false;
-  message: string = '';
-
   constructor(
     private fb: FormBuilder,
     private service: RegisterService,
     private router: Router,
-    private auth: AuthService) { }
+    private auth: AuthService
+  ) { }
+    
+  loginModel: LoginModel;
+  loginForm: FormGroup;
+  submitted = false;
+  message: string = '';
 
   messageValidate = {
     email: {

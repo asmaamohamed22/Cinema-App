@@ -15,6 +15,7 @@ import { ForgetPasswordComponent } from './Account/forget-password/forget-passwo
 import { PasswordConfirmComponent } from './Account/password-confirm/password-confirm.component';
 import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { UsersComponent } from './Admin/users/users.component';
+import { AddUserComponent } from './Admin/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UsersComponent } from './Admin/users/users.component';
     PasswordConfirmComponent,
     DashboardComponent,
     UsersComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,10 @@ import { RegisterService } from '../services/register.service';
 })
 export class NavMenuComponent implements OnInit {
 
-  constructor(private service: RegisterService, private route: Router, private auth: AuthService) { }
+  constructor(
+    private service: RegisterService, 
+    private route: Router, 
+    private auth: AuthService) { }
 
   ngOnInit() {
     if (this.IsUserRegistered()) {
@@ -54,5 +57,14 @@ export class NavMenuComponent implements OnInit {
     return false;
   }
 
-  //
+  //Done
+  IsAdmin() {
+    var isAdmin = !!this.auth.role;
+    if (isAdmin) {
+      if (this.auth.role.toLowerCase() == 'admin') {
+        return true;
+      }
+    }
+    return false;
+  }
 }

@@ -43,8 +43,7 @@ export class RegisterComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder, private service: RegisterService, private customValidator: CustomvalidationService,
-    private router: Router) { }
+  constructor(private fb: FormBuilder, private service: RegisterService, private customValidator: CustomvalidationService) { }
 
   ngOnInit() {
     this.isbusy =false;
@@ -89,29 +88,6 @@ export class RegisterComponent implements OnInit {
   closeAlert() {
     this.alert = false;
   }
-
-  /*   // UserName Exist
-    isUserNameExist(){
-      for(let name of this.users){
-        let username = this.userForm.value.name;
-        console.log(name.userName)
-        if(name.userName === username){
-          this.validMessages.name.exist = 'Username is already exist';
-          return true
-        }
-      }
-      return false;
-    }
-
-    // Email Exist
-    isEmailExist(email:string){
-      for(let user of this.users){
-        if(user.email === email){
-          return true
-        }
-      }
-      return false;
-    } */
 
   isUserNameExist() {
     const name = this.userForm.value.userName;

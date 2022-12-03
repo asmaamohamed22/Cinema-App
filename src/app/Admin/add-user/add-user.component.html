@@ -1,0 +1,145 @@
+<section>
+  <div class="container ">
+    <div class="row d-flex flex-column justify-content-center align-items-center">
+      <div>
+        <div class="card text-black" style="border-radius: 25px">
+          <div class="card-body">
+            <div class="row justify-content-center">
+
+              <div class="alert alert-success alert-dismissible fade show" role="alert"
+                *ngIf="message != null && message != ''">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+                {{message}}
+              </div>
+
+              <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                *ngIf="errorMsg != null && errorMsg != ''">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                </button>
+                {{errorMsg}}
+              </div>
+
+              <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                <p class="text-center h2 fw-bold ">
+                  {{title}}
+                </p>
+                <form class="mx-1 mx-md-2" [formGroup]="userForm" (ngSubmit)="AddUser()">
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="fa fa-user fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" formControlName="userName" id="userName" class="form-control"
+                        placeholder="Name" [class.is-invalid]="!this.userForm.get('userName').valid &&
+                        (this.userForm.get('userName').dirty || this.userForm.get('userName').touched)"
+                        />
+                      <div class="text-danger" *ngIf="
+                          (this.userForm.get('userName').touched || submitted) &&
+                          this.userForm.get('userName').errors?.required &&
+                          this.userForm.get('userName').invalid
+                        ">
+                        UserName is required
+                      </div>
+                      <div class="text-danger" *ngIf="this.userForm.get('userName').value !== null &&
+                      this.userForm.get('userName').value !== '' && isUserNameExist()">
+                        {{messageValidate.userName.matchUserName}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="fa fa-envelope fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="email" formControlName="email" id="email" class="form-control" placeholder="Email"
+                        [class.is-invalid]="this.userForm.get('email').invalid &&
+                        (this.userForm.get('email').dirty || this.userForm.get('email').touched)"/>
+                      <div class="text-danger"
+                        [class.is-invalid]="this.userForm.get('email').invalid && this.userForm.get('email').touched ">
+                        <span class="text-danger" *ngIf="
+                          (this.userForm.get('email').touched || submitted) &&
+                          this.userForm.get('email').errors?.required">
+                          Email is required
+                        </span>
+                        <span class="text-danger" *ngIf="
+                          this.userForm.get('email').touched &&
+                          this.userForm.get('email').errors?.email">
+                          Enter a valid email
+                        </span>
+                      </div>
+                      <div class="text-danger" *ngIf="this.userForm.get('email').value !== null &&
+                      this.userForm.get('email').value !== '' && isEmailExist()">
+                        {{messageValidate.email.matchEmail}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                      <span class="text-danger"
+                        *ngIf="(this.userForm.get('password').touched || submitted) && this.userForm.get('password').errors?.required">
+                        Password is required
+                      </span>
+                      <span class="text-danger"
+                        *ngIf="this.userForm.get('password').touched && this.userForm.get('password').errors?.invalidPassword">
+                        Password should have minimum 6 characters, at least 1 uppercase letter, 1 lowercase
+                        letter and 1 number
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="fa fa-lock fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="password" class="form-control" formControlName="confirmPassword"
+                        placeholder="Confirm Password">
+                      <span class="text-danger"
+                        *ngIf="(this.userForm.get('confirmPassword').touched || submitted)&& this.userForm.get('confirmPassword').errors?.required">
+                        Confirm Password is required
+                      </span>
+                      <span class="text-danger"
+                        *ngIf="this.userForm.get('confirmPassword').touched && this.userForm.get('confirmPassword').errors?.passwordMismatch">
+                        Passwords doesn't match
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <i class="fa fa-phone fa-lg me-3 fa-fw"></i>
+                    <div class="form-outline flex-fill mb-0">
+                      <input type="text" formControlName="phoneNumber" id="phoneNumber" class="form-control"
+                        placeholder="Phone Number"
+                        [class.is-invalid]="this.userForm.get('phoneNumber').invalid &&
+                        (this.userForm.get('phoneNumber').dirty || this.userForm.get('phoneNumber').touched)"/>
+                        <div class="text-danger"
+                        *ngIf="(this.userForm.get('phoneNumber').touched || submitted)&& this.userForm.get('phoneNumber').errors?.required">
+                        Phone Number is required
+                        </div>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-3">
+                    <div class="form-check flex-fill mb-0">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input ml-2" formControlName="emailConfirmed"
+                          name="emailConfirmed" id="emailConfirmed" value="checkedValue">
+                        Activate email
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <button type="submit" class="btn btn-secondary btn-lg"
+                      [disabled]="!userForm.valid|| (isUserNameExist() && isEmailExist())">
+                       {{btnTitle}}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
